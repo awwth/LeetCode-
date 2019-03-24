@@ -1,0 +1,64 @@
+空间复杂度
+空间复杂度是对一个算法在运行过程中临时占用存储空间大小的量度。
+
+
+计算方法：
+①忽略常数，用O(1)表示
+②递归算法的空间复杂度=递归深度N*每次递归所要的辅助空间
+③对于单线程来说，递归有运行时堆栈，求的是递归最深的那一次压栈所耗费的空间的个数，因为递归最深的那一次所耗费的空间足以容纳它所有递归过程。
+
+如：
+
+int a;
+int b;
+int c;
+printf("%d %d %d \n",a,b,c);
+
+
+
+它的空间复杂度O（n）=O（1）；
+
+int fun(int n,)
+{
+int k=10;
+if（n==k)
+return n;
+else
+return fun(++n);
+}
+
+
+递归实现，调用fun函数，每次都创建1个变量k。调用n次，空间复杂度O（n*1）=O（n)。
+
+
+
+比如：
+////斐波那契数列循环算法：(*****)
+ 
+//时间复杂度：O(n)
+//空间复杂度：O(1)
+long long Fib(long N)
+{
+	long long  first = 1;
+	long long second = 1;
+	long long  ret = 0;
+	int i = 3;
+	for (; i <= N; ++i)
+	{
+		ret = first + second;
+		first = second;
+		second = ret;
+	}
+	return second;
+}
+int main()
+{
+	printf("%u\n",Fib(50));
+	system("pause");
+	return 0;
+	
+}
+
+ 时间复杂度大概就是运行时间和输入规模的函数，
+ 简单的说，一个函数处理 n 个数字，需要 f(n) 秒的时间，时间复杂度就为 O(f(n))；空间复杂度把时间换成内存就够了。 
+

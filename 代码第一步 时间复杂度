@@ -1,0 +1,98 @@
+时间复杂度O(T(n))
+
+
+对程序基本操作执行次数的统计。刚才的四个场景，分别对应了程序中最常见的四种执行方式：
+
+场景1：T（n） = 3n，执行次数是线性的。
+
+    void eat1(int n){
+        for(int i=0; i<n; i++){;
+            System.out.println("等待一天");
+            System.out.println("等待一天");
+            System.out.println("吃一寸面包");
+        }
+    }
+    vo
+
+场景2：T（n） = 5logn，执行次数是对数的。
+
+    void eat2(int n){
+       for(int i=1; i<n; i*=2){
+           System.out.println("等待一天");
+           System.out.println("等待一天");
+           System.out.println("等待一天");
+           System.out.println("等待一天");
+           System.out.println("吃一半面包");
+       }
+    }
+
+场景3：T（n） = 2，执行次数是常量的。
+
+    void eat3(int n){
+       System.out.println("等待一天");
+       System.out.println("吃一个鸡腿");
+    }
+
+场景4：T（n） = 0.5n^2 + 0.5n，执行次数是一个多项式。
+
+    void eat4(int n){
+       for(int i=0; i<n; i++){
+           for(int j=0; j<i; j++){
+               System.out.println("等待一天");
+           }
+           System.out.println("吃一寸面包");
+       }
+    }
+    
+    有了基本操作执行次数的函数 T（n），是否就可以分析和比较一段代码的运行时间了呢？还是有一定的困难。
+
+比如算法A的相对时间是T（n）= 100n，算法B的相对时间是T（n）= 5n^2，这两个到底谁的运行时间更长一些？这就要看n的取值了。
+
+所以，这时候有了渐进时间复杂度（asymptotic time complectiy）的概念，官方的定义如下：
+
+若存在函数 f（n），使得当n趋近于无穷大时，T（n）/ f（n）的极限值为不等于零的常数，则称 f（n）是T（n）的同数量级函数。
+
+记作 T（n）= O（f（n）），称O（f（n）） 为算法的渐进时间复杂度，简称时间复杂度。
+
+渐进时间复杂度用大写O来表示，所以也被称为大O表示法。
+
+
+场景1：
+
+T（n） = 3n 
+
+最高阶项为3n，省去系数3，转化的时间复杂度为：
+
+T（n） =  O（n）
+
+
+场景2：
+
+T（n） = 5logn 
+
+最高阶项为5logn，省去系数5，转化的时间复杂度为：
+
+T（n） =  O（logn）
+
+
+场景3：
+
+T（n） = 2
+
+只有常数量级，转化的时间复杂度为：
+
+T（n） =  O（1）
+
+
+场景4：
+
+T（n） = 0.5n^2 + 0.5n
+
+最高阶项为0.5n^2，省去系数0.5，转化的时间复杂度为：
+
+T（n） =  O（n^2）
+
+
+这四种时间复杂度究竟谁用时更长，谁节省时间呢？稍微思考一下就可以得出结论：
+
+O（1）< O（logn）< O（n）< O（n^2）

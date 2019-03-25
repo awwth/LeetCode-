@@ -48,8 +48,8 @@ M             1000
 解释: M = 1000, CM = 900, XC = 90, IV = 4.
 
 
-题解：
-class Solution
+题解:
+class Solution                             
 {
   public int romnums(String s)
   {
@@ -57,7 +57,7 @@ class Solution
     int rom_int=0;
     for(int i;i<n;i++)
     {
-      switch(s.charAT(i))
+      switch(s.charAt(i))                  ///charAt() 方法用于返回指定索引处的字符。索引范围为从 0 到 length() - 1。
       {
       case'I': rom_int=rom_int+1;break;
       case'V': rom_int=rom_int+5;break;

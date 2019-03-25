@@ -13,7 +13,7 @@
 class Solution{
   public int[] towSum(int[] nums,int target)     ////int[] 是指定义一个整型的一维数组 这里是定义nums[]
   {
-    for(i=0;i<nums.length;i++)
+    for(i=0;i<nums.length;i++)     ///在不确定数组有多少个元素时，可以直接用length来确定  即nums.length
     {
       for(int j=i+1;j<nums.length;j++)
         {

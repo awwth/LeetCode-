@@ -1,0 +1,52 @@
+编写一个函数来查找字符串数组中的最长公共前缀。
+
+如果不存在公共前缀，返回空字符串 ""。
+
+示例 1:
+
+输入: ["flower","flow","flight"]
+输出: "fl"
+
+示例 2:
+
+输入: ["dog","racecar","car"]
+输出: ""
+解释: 输入不存在公共前缀。
+
+说明:
+
+所有输入只包含小写字母 a-z 。
+方法一：水平扫描法
+
+
+思路
+
+首先，我们将描述一种查找一组字符串的最长公共前缀 LCP(S1…Sn)LCP(S_1 \ldots S_n)LCP(S1​…Sn​) 的简单方法。 我们将会用到这样的结论：
+
+LCP(S1…Sn)=LCP(LCP(LCP(S1,S2),S3),…Sn)LCP(S_1 \ldots S_n) = LCP(LCP(LCP(S_1, S_2),S_3),\ldots S_n)LCP(S1​…Sn​)=LCP(LCP(LCP(S1​,S2​),S3​),…Sn​)
+
+算法
+
+为了运用这种思想，算法要依次遍历字符串 [S1…Sn][S_1 \ldots S_n][S1​…Sn​]，当遍历到第 iii 个字符串的时候，找到最长公共前缀 LCP(S1…Si)LCP(S_1 \ldots S_i)LCP(S1​…Si​)。
+当 LCP(S1…Si)LCP(S_1 \ldots S_i)LCP(S1​…Si​) 是一个空串的时候，算法就结束了。 
+否则，在执行了 nnn 次遍历之后，算法就会返回最终答案 LCP(S1…Sn)LCP(S_1 \ldots S_n)LCP(S1​…Sn​)。
+
+总之就是用S[0]和S[1]去比较得出公共前缀， 然后再拿这个公共前缀和后面的去比较  ，不断的得出公共前缀。
+
+
+代码：
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        if(strs.length==0) return "";
+        String prefix= strs[0];
+        for(int i=0;i<strs.length;i++)
+            while(strs[i].indexOf(prefix)!=0)                  //////////知识点   indexOf() 方法可返回某个指定的字符串值在字符串中首次出现的位置。  注意它对大小写很敏感
+            {
+                prefix =prefix.substring(0,prefix.length()-1);  ////////知识点    substring() 方法用于提取字符串中介于两个指定下标之间的字符。  
+                                                                                  这里就是从字符串prefix的第1个字符的位置到最后字符的位置。
+                    if(prefix.isEmpty())  return "";
+            }
+        
+        return prefix;
+    }
+}

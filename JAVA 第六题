@@ -21,3 +21,39 @@
 
 
 思路：
+假设我们有一个函数 boolean allUnique(String substring) ，如果子字符串中的字符都是唯一的，它会返回true，否则会返回false。 
+我们可以遍历给定字符串 s 的所有可能的子字符串并调用函数 allUnique。 如果事实证明返回值为true，那么我们将会更新无重复字符子串的最大长度的答案。
+现在让我们填补缺少的部分：
+为了枚举给定字符串的所有子字符串，我们需要枚举它们开始和结束的索引。假设开始和结束的索引分别为 i 和 j。那么我们有 0≤i<j≤n （这里的结束索引 j 是按惯例排除的）。
+因此，使用 i 从0到 n−1 以及 j 从 i+1 到 n 这两个嵌套的循环，我们可以枚举出 s 的所有子字符串。
+要检查一个字符串是否有重复字符，我们可以使用集合。
+我们遍历字符串中的所有字符，并将它们逐个放入 set 中。
+在放置一个字符之前，我们检查该集合是否已经包含它。如果包含，我们会返回 false。循环结束后，我们返回 true。
+
+public class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int n = s.length();
+        int ans = 0;
+        for (int i = 0; i < n; i++)
+            for (int j = i + 1; j <= n; j++)
+                if (allUnique(s, i, j)) ans = Math.max(ans, j - i);
+        return ans;
+    }
+
+    public boolean allUnique(String s, int start, int end) {
+        Set<Character> set = new HashSet<>();    ////使用HashSet
+        for (int i = start; i < end; i++) {
+            Character ch = s.charAt(i);        ////Character 类用于对单个字符进行操作////charAt() 方法用于返回指定索引处的字符。索引范围为从 0 到 length() - 1。
+            if (set.contains(ch)) return false;
+            set.add(ch);
+        }
+        return true;
+    }
+}
+
+(1) 为啥要用HahSet?
+    假如我们现在想要在一大堆数据中查找X数据。LinkedList的数据结构就不说了，查找效率低的可怕。ArrayList哪，如果我们不知道X的位置序号，还是一样要全部遍历一次直到查到结果，效率一样可怕。HashSet天生就是为了提高查找效率的。
+
+(2) hashCode 散列码
+    散列码是由对象导出的一个整数值。在Object中有一个hashCode方法来得到散列码。基本上，每一个对象都有一个默认的散列码，其值就是对象的内存地址。
+    
